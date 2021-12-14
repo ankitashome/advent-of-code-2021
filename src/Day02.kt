@@ -1,3 +1,8 @@
+import Direction.DOWN
+import Direction.FORWARD
+import Direction.UP
+import Direction.valueOf
+
 enum class Direction {
     FORWARD, UP, DOWN
 }
@@ -13,9 +18,9 @@ fun main() {
         var depth = 0
         input.forEach {
             when (it.direction) {
-                Direction.FORWARD -> horizontalPos += it.position
-                Direction.UP      -> depth -= it.position
-                Direction.DOWN    -> depth += it.position
+                FORWARD -> horizontalPos += it.position
+                UP      -> depth -= it.position
+                DOWN    -> depth += it.position
             }
         }
         return horizontalPos * depth
@@ -27,12 +32,12 @@ fun main() {
         var aim = 0
         input.forEach {
             when (it.direction) {
-                Direction.FORWARD -> {
+                FORWARD -> {
                     horizontalPos += it.position
                     depth += aim * it.position
                 }
-                Direction.UP      -> aim -= it.position
-                Direction.DOWN    -> aim += it.position
+                UP      -> aim -= it.position
+                DOWN    -> aim += it.position
             }
         }
         return horizontalPos * depth
@@ -40,10 +45,10 @@ fun main() {
 
     val courseInput = readInput("Day02")
     val courseData = courseInput.map {
-        val split = it.split(" ")
+        val (dir, pos) = it.split(" ")
         CourseData(
-            direction = Direction.valueOf(split.first().uppercase()),
-            position = split.last().toInt()
+            direction = valueOf(dir.uppercase()),
+            position = pos.toInt()
         )
     }
     println(part1(courseData))
