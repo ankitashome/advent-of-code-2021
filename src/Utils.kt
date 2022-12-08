@@ -8,6 +8,11 @@ import java.security.MessageDigest
 fun readInput(name: String) = File("src", "$name.txt").readLines()
 
 /**
+ * Reads text from the given input file.
+ */
+fun readText(name: String) = File("src", "$name.txt").readText()
+
+/**
  * Reads lines and converts to Integer from the given input txt file.
  */
 fun readInputInInt(name: String) = File("src", "$name.txt").readLines().map { it.toInt() }
