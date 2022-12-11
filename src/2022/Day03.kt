@@ -26,26 +26,26 @@ fun main() {
         return if (items.size == 1) { //find common in one entry
             val itemsPerComp = items.first().splitByLength()
             itemsPerComp.first.intersect(itemsPerComp.second).toList()
-        } else { //find common amongst multiple entries
-            // items.chunked(3).
-            listOf()
+        } else { //find common amongst 3 entries
+            items.chunked(3)
+                .flatMap { a -> a.map { it.toSet() }.reduce { i, j -> i.intersect(j) } }
         }
     }
 
     fun part1(input: Set<String>): Int {
-        return getAggregatedPrio(input.flatMap { getCommonItem(setOf( it)) })
+        return getAggregatedPrio(input.flatMap { getCommonItem(setOf(it)) })
     }
 
-//    fun part2(input: Set<String>): Int {
-//        input.flatMap { getCommonItem() }
-//    }
+    fun part2(input: Set<String>): Int {
+        return getAggregatedPrio(getCommonItem(input))
+    }
 
     val rucksackContent = readInput("Day03").toSet()
     println(part1(rucksackContent))
-//    println(part2(calorieCountData))
+    println(part2(rucksackContent))
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day03_test").toSet()
     check(part1(testInput) == 157)
-//    check(part2(testInput) == 70)
+    check(part2(testInput) == 70)
 }
